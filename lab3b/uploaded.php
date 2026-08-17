@@ -27,6 +27,15 @@ if (move_uploaded_file($temporary_pdf, $uploaded_pdf_file)) {
     echo 'Failed to upload PDF file';
 }
 
-echo '<pre>';
-var_dump($_FILES);
-exit;
+// Handle Image File
+$uploaded_image_file = $upload_directory . basename($_FILES['image_file']['name']);
+$temporary_image     = $_FILES['image_file']['tmp_name'];
+
+if (move_uploaded_file($temporary_image, $uploaded_image_file)) {
+    $image_url = $relative_path . basename($_FILES['image_file']['name']);
+    ?>
+    <img src="<?php echo $image_url; ?>" alt="Uploaded Image" style="max-width: 100%;" />
+    <?php
+} else {
+    echo 'Failed to upload image file';
+}
