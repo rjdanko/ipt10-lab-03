@@ -27,6 +27,18 @@ if (move_uploaded_file($temporary_pdf, $uploaded_pdf_file)) {
     echo 'Failed to upload PDF file';
 }
 
-echo '<pre>';
-var_dump($_FILES);
-exit;
+// Handle Video File
+$uploaded_video_file = $upload_directory . basename($_FILES['video_file']['name']);
+$temporary_video     = $_FILES['video_file']['tmp_name'];
+
+if (move_uploaded_file($temporary_video, $uploaded_video_file)) {
+    $video_url = $relative_path . basename($_FILES['video_file']['name']);
+    ?>
+    <video width="640" height="360" controls>
+        <source src="<?php echo $video_url; ?>" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <?php
+} else {
+    echo 'Failed to upload video file';
+}
