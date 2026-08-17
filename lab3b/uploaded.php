@@ -16,17 +16,18 @@ if (move_uploaded_file($temporary_file, $uploaded_text_file)) {
     echo 'Failed to upload file';
 }
 
-$uploaded_pdf_file = $upload_directory . basename($_FILES['pdf_file']['name']);
-$temporary_pdf     = $_FILES['pdf_file']['tmp_name'];
-if (move_uploaded_file($temporary_pdf, $uploaded_pdf_file)) {
-    $pdf_url = $relative_path . basename($_FILES['pdf_file']['name']);
+// Handle Audio File
+$uploaded_audio_file = $upload_directory . basename($_FILES['audio_file']['name']);
+$temporary_audio     = $_FILES['audio_file']['tmp_name'];
+
+if (move_uploaded_file($temporary_audio, $uploaded_audio_file)) {
+    $audio_url = $relative_path . basename($_FILES['audio_file']['name']);
     ?>
-    <embed src="<?php echo $pdf_url; ?>" type="application/pdf" width="100%" height="600px" />
+    <audio controls>
+        <source src="<?php echo $audio_url; ?>" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <?php
 } else {
-    echo 'Failed to upload PDF file';
+    echo 'Failed to upload audio file';
 }
-
-echo '<pre>';
-var_dump($_FILES);
-exit;
