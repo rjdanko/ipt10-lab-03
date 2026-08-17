@@ -1,7 +1,0 @@
-@startuml
-[*] --> Idle
-Idle --> Authentication : Insert Card
-Authentication --> Transaction : Enter PIN
-Transaction --> Idle : Complete Transaction
-Transaction --> Authentication : Incorrect PIN
-@enduml

@@ -1,5 +1,0 @@
-@startuml
-[*] --> Closed
-Closed --> Open : Open Door
-Open --> Closed : Close Door
-@enduml

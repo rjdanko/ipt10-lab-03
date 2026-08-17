@@ -16,6 +16,18 @@ if (move_uploaded_file($temporary_file, $uploaded_text_file)) {
     echo 'Failed to upload file';
 }
 
+// Handle PDF File
+$uploaded_pdf_file = $upload_directory . basename($_FILES['pdf_file']['name']);
+$temporary_pdf     = $_FILES['pdf_file']['tmp_name'];
+if (move_uploaded_file($temporary_pdf, $uploaded_pdf_file)) {
+    $pdf_url = $relative_path . basename($_FILES['pdf_file']['name']);
+    ?>
+    <embed src="<?php echo $pdf_url; ?>" type="application/pdf" width="100%" height="600px" />
+    <?php
+} else {
+    echo 'Failed to upload PDF file';
+}
+
 // Handle Audio File
 $uploaded_audio_file = $upload_directory . basename($_FILES['audio_file']['name']);
 $temporary_audio     = $_FILES['audio_file']['tmp_name'];
